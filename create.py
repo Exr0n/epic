@@ -1,4 +1,4 @@
-from subprocess import Popen
+from subprocess import run
 
 soup = '''
 index.html:smt 2017-03-31
@@ -74,5 +74,8 @@ for line in soup.split('\n'):
         dates.append(date[1])
 
 for date in dates:
-    print(['git', 'commit', f'--date={date}T00:13:37', '-m', 'epic'])
+    with open('epic.md', 'a+') as wf:
+        wf.write('# epic\n')
+    run(['git', 'add', 'epic.md'])
+    run(['git', 'commit', f'--date={date}T00:13:37', '-m', 'epic'])
 
